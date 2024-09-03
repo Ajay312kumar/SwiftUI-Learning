@@ -8,40 +8,28 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var name: String = ""
+    @State private var friends: [String] = []
+    
+    
     var body: some View {
         VStack() {
-            Text("First")
-                .foregroundColor(.red)
-            Text("Second")
-            Text("Third")
-            Image("doggy")
-                  .resizable()
-                  .frame(width: 100, height: 100)
-                  .foregroundColor(.white)
-                  .clipShape(Circle())
-            AsyncImage(url: URL(string: "https://www.sticklerproofreading.com/wp-content/uploads/2017/02/dog-using-laptop-computer-e1487627703339.jpg")) { phase in
-                if let image = phase.image {
-                    image
-                        .resizable()
-                        .clipShape(Rectangle())
-                        .frame(width: 300, height: 300)
-                } else if phase.error != nil {
-                    Text("Failed to load image")
-                } else {
-                    ProgressView("Downloading...")
+            
+            TextField("please Enter name", text: $name)
+                .textFieldStyle(.roundedBorder)
+                .onSubmit {
+                    friends.append(name)
+                    name = ""
                 }
+            List(friends, id: \.self) { friend in
+                Text(friend)
             }
-
-                
-        }
-        HStack{
-            Text("third")
-            Text("Four")
-        }
-        .foregroundColor(.cyan)
+            Spacer()
+            
+        }.padding()
     }
 }
-
 #Preview {
     ContentView()
 }
