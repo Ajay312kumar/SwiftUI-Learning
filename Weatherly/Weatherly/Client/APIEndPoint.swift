@@ -10,7 +10,7 @@ import Foundation
 
 enum APIEndPoint{
     
-    static var baseUrl = "https://api.openweathermap.org/"
+    static var baseUrl = "https://api.openweathermap.org/geo/1.0/direct?q=\(city)&limit=5&appid=\(Constant.weatherKey)"
     
     case coordinateByLocationName(String)
     case weatherByLatLong(Double, Double)
